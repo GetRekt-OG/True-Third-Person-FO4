@@ -1,0 +1,579 @@
+{
+  "modName": "TrueThirdPerson",
+  "displayName": "True Third Person",
+  "minMcmVersion": 1,
+  "content": [
+    {
+      "id": "bUseMCM:Main",
+      "type": "switcher",
+      "text": "Use MCM settings",
+      "help": "Enable to use all settings shown here. Disable to return to the F4SE plugin INI. Close the pause menu to apply changes.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "bEnabled:Main",
+      "type": "switcher",
+      "text": "Enable True Third Person",
+      "help": "Independent camera, movement and weapon facing. Applies when you close the pause menu. Both target locks have their own switches and work with this off.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "bOnlyWhenRelaxed:Main",
+      "type": "switcher",
+      "text": "Only when the gun is relaxed",
+      "help": "With a gun out and ready (drawing, alert, shooting, aiming) the game's own camera and movement are used; True Third Person takes over once the gun drops to the relaxed pose (see Relax after). Holstered and melee are unchanged. Target lock keeps working in both.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "iHipFireHoldMs:Main",
+      "type": "slider",
+      "text": "Hip-fire facing hold (ms)",
+      "help": "Time spent facing the firing direction after shooting stops.",
+      "valueOptions": {
+        "sourceType": "ModSettingInt",
+        "min": 275,
+        "max": 5000,
+        "step": 25
+      }
+    },
+    {
+      "id": "iTorsoTwistDegrees:Main",
+      "type": "slider",
+      "text": "Hip-fire torso twist (degrees)",
+      "help": "While hip firing, the upper body twists up to this far toward the crosshair and the legs keep running your move direction; the body only turns for the rest. 0 turns the whole body to the camera, as before.",
+      "valueOptions": {
+        "sourceType": "ModSettingInt",
+        "min": 0,
+        "max": 80,
+        "step": 5
+      }
+    },
+    {
+      "id": "bCustomRelax:Main",
+      "type": "switcher",
+      "text": "Custom weapon relax time",
+      "help": "On: the time below replaces how long your gun stays raised after drawing or shooting before it drops to the relaxed pose. Off: the game's own timing.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    },
+    {
+      "id": "fRelaxSeconds:Main",
+      "type": "slider",
+      "text": "Relax after (seconds)",
+      "help": "Seconds the gun stays raised after a draw or a shot. 0 relaxes right after the draw. Needs the switch above on.",
+      "valueOptions": {
+        "sourceType": "ModSettingFloat",
+        "min": 0,
+        "max": 10,
+        "step": 0.1
+      }
+    },
+    {
+      "id": "bResetDefaults:Main",
+      "type": "switcher",
+      "text": "Reset all settings to defaults",
+      "help": "Experimental. Turn on to put every True Third Person setting on every page back to its default. The switch turns itself off when done. If the values shown don't change, close and reopen the menu.",
+      "valueOptions": {
+        "sourceType": "ModSettingBool"
+      }
+    }
+  ],
+  "pages": [
+    {
+      "pageDisplayName": "Melee Target Lock",
+      "content": [
+        {
+          "id": "bEnabled:TargetLock",
+          "type": "switcher",
+          "text": "Enable melee target lock",
+          "help": "Enable or disable melee targeting. With True Third Person off, the character turns to the target and the normal camera follows.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bShowMarker:TargetLock",
+          "type": "switcher",
+          "text": "Show target-lock marker",
+          "help": "Show or hide the marker on the locked enemy. Target lock keeps working when the marker is hidden.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "iKey:TargetLock",
+          "type": "dropdown",
+          "text": "Lock key (mouse and keyboard)",
+          "help": "Toggles the melee target lock. Pick a key the game doesn't already use for something else; the key is taken over while a melee weapon is drawn. None disables the key.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "options": [
+              "Middle mouse button",
+              "Mouse button 4",
+              "Mouse button 5",
+              "B",
+              "H",
+              "K",
+              "L",
+              "N",
+              "O",
+              "P",
+              "U",
+              "X",
+              "Y",
+              "Z",
+              "None"
+            ]
+          }
+        },
+        {
+          "id": "iGamepadKey:TargetLock",
+          "type": "dropdown",
+          "text": "Lock button (controller)",
+          "help": "Toggles the melee target lock in third person. The button is taken over while a melee weapon is drawn, so pick one you don't need then. None disables the button.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "options": [
+              "Right stick click (R3)",
+              "Left stick click (L3)",
+              "Right bumper (RB)",
+              "Left bumper (LB)",
+              "A",
+              "B",
+              "X",
+              "Y",
+              "D-pad up",
+              "D-pad down",
+              "D-pad left",
+              "D-pad right",
+              "None"
+            ]
+          }
+        },
+        {
+          "id": "iDistance:TargetLock",
+          "type": "slider",
+          "text": "Maximum target distance",
+          "help": "Maximum acquisition distance in game units.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "min": 200,
+            "max": 10000,
+            "step": 100
+          }
+        },
+        {
+          "id": "iResponse:TargetLock",
+          "type": "slider",
+          "text": "Tracking response",
+          "help": "Higher values turn toward the target more quickly.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "min": 1,
+            "max": 40,
+            "step": 1
+          }
+        },
+        {
+          "id": "iSwitchMousePixels:TargetLock",
+          "type": "slider",
+          "text": "Mouse target-switch threshold",
+          "help": "Horizontal mouse travel required to switch targets.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "min": 20,
+            "max": 1000,
+            "step": 10
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "Ranged Target Lock",
+      "content": [
+        {
+          "id": "bEnabled:RangedTargetLock",
+          "type": "switcher",
+          "text": "Enable ranged target lock",
+          "help": "Off by default. Locks guns and other ranged weapons onto an enemy. Aiming down sights pauses the lock so you can aim freely; it picks the target back up when you lower the weapon. With True Third Person off, the character turns to the target and the normal camera follows.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bShowMarker:RangedTargetLock",
+          "type": "switcher",
+          "text": "Show target-lock marker",
+          "help": "Show or hide the marker on the locked enemy. Target lock keeps working when the marker is hidden.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "iKey:RangedTargetLock",
+          "type": "dropdown",
+          "text": "Lock key (mouse and keyboard)",
+          "help": "Toggles the ranged target lock. Pick a key the game doesn't already use for something else; the key is taken over while a ranged weapon is drawn. None disables the key.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "options": [
+              "Middle mouse button",
+              "Mouse button 4",
+              "Mouse button 5",
+              "B",
+              "H",
+              "K",
+              "L",
+              "N",
+              "O",
+              "P",
+              "U",
+              "X",
+              "Y",
+              "Z",
+              "None"
+            ]
+          }
+        },
+        {
+          "id": "iGamepadKey:RangedTargetLock",
+          "type": "dropdown",
+          "text": "Lock button (controller)",
+          "help": "Toggles the ranged target lock in third person. The button is taken over while a ranged weapon is drawn, so pick one you don't need then. None disables the button.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "options": [
+              "Right stick click (R3)",
+              "Left stick click (L3)",
+              "Right bumper (RB)",
+              "Left bumper (LB)",
+              "A",
+              "B",
+              "X",
+              "Y",
+              "D-pad up",
+              "D-pad down",
+              "D-pad left",
+              "D-pad right",
+              "None"
+            ]
+          }
+        },
+        {
+          "id": "iDistance:RangedTargetLock",
+          "type": "slider",
+          "text": "Maximum target distance",
+          "help": "Maximum acquisition distance in game units.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "min": 500,
+            "max": 20000,
+            "step": 250
+          }
+        },
+        {
+          "id": "iResponse:RangedTargetLock",
+          "type": "slider",
+          "text": "Tracking response",
+          "help": "Higher values turn toward the target more quickly.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "min": 1,
+            "max": 40,
+            "step": 1
+          }
+        },
+        {
+          "id": "iSwitchMousePixels:RangedTargetLock",
+          "type": "slider",
+          "text": "Mouse target-switch threshold",
+          "help": "Horizontal mouse travel required to switch targets.",
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "min": 20,
+            "max": 1000,
+            "step": 10
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "Camera Offsets",
+      "content": [
+        {
+          "text": "Added to the game's camera position (fOverShoulder* settings), so they work together with other camera mods: your +40 and another mod's -40 give 0. Applies when you close the pause menu.",
+          "type": "text"
+        },
+        {
+          "text": "Weapon holstered",
+          "type": "section"
+        },
+        {
+          "id": "fHolsteredX:CameraOffset",
+          "type": "slider",
+          "text": "Side",
+          "help": "Moves the camera right (positive) or left (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "id": "fHolsteredZ:CameraOffset",
+          "type": "slider",
+          "text": "Height",
+          "help": "Moves the camera up (positive) or down (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "text": "Gun drawn",
+          "type": "section"
+        },
+        {
+          "id": "fRangedX:CameraOffset",
+          "type": "slider",
+          "text": "Side",
+          "help": "Moves the camera right (positive) or left (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "id": "fRangedY:CameraOffset",
+          "type": "slider",
+          "text": "Distance",
+          "help": "Moves the camera forward (positive) or back (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "id": "fRangedZ:CameraOffset",
+          "type": "slider",
+          "text": "Height",
+          "help": "Moves the camera up (positive) or down (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "text": "Melee weapon or fists",
+          "type": "section"
+        },
+        {
+          "id": "fMeleeX:CameraOffset",
+          "type": "slider",
+          "text": "Side",
+          "help": "Moves the camera right (positive) or left (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "id": "fMeleeY:CameraOffset",
+          "type": "slider",
+          "text": "Distance",
+          "help": "Moves the camera forward (positive) or back (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        },
+        {
+          "id": "fMeleeZ:CameraOffset",
+          "type": "slider",
+          "text": "Height",
+          "help": "Moves the camera up (positive) or down (negative), added on top of the game's own setting or another camera mod's.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": -100,
+            "max": 100,
+            "step": 1
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "Controller",
+      "content": [
+        {
+          "id": "fHolsteredX:Controller",
+          "type": "slider",
+          "text": "Holstered X sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fHolsteredY:Controller",
+          "type": "slider",
+          "text": "Holstered Y sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fDrawnX:Controller",
+          "type": "slider",
+          "text": "Weapon drawn X sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fDrawnY:Controller",
+          "type": "slider",
+          "text": "Weapon drawn Y sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fADSX:Controller",
+          "type": "slider",
+          "text": "Aiming down sights X sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fADSY:Controller",
+          "type": "slider",
+          "text": "Aiming down sights Y sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "Mouse and Keyboard",
+      "content": [
+        {
+          "id": "fHolsteredX:MouseKeyboard",
+          "type": "slider",
+          "text": "Holstered X sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fHolsteredY:MouseKeyboard",
+          "type": "slider",
+          "text": "Holstered Y sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fDrawnX:MouseKeyboard",
+          "type": "slider",
+          "text": "Weapon drawn X sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fDrawnY:MouseKeyboard",
+          "type": "slider",
+          "text": "Weapon drawn Y sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fADSX:MouseKeyboard",
+          "type": "slider",
+          "text": "Aiming down sights X sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        },
+        {
+          "id": "fADSY:MouseKeyboard",
+          "type": "slider",
+          "text": "Aiming down sights Y sensitivity",
+          "help": "Camera sensitivity multiplier. 1.0 leaves sensitivity unchanged.",
+          "valueOptions": {
+            "sourceType": "ModSettingFloat",
+            "min": 0.05,
+            "max": 5,
+            "step": 0.05
+          }
+        }
+      ]
+    }
+  ]
+}
